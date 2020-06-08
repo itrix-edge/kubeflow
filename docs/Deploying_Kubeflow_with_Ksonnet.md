@@ -1,7 +1,3 @@
-# kubeflow
-kubeflow for itrix-edge
-
-
 
 ## Deploying Kubeflow with Ksonnet
 
