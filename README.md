@@ -17,6 +17,25 @@ inferenceservice.serving.kubeflow.org/flowers-sample configured
 ```
 
 ## Kfserving run a prediction
+
+Convert the test picture test.png to base64
+```
+$ cat test.png | base64  #Copy the result to the value of base64 in input.json below
+```
+Save the following file as input.json
+```
+{
+    "instances": [
+        {
+            "image_bytes": {
+                "b64": "iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABC0lEQVR4nGNgGHCg0/NvOw8Oudqnf//+dcQq5bLk5j+g5OMlfphyDt/+/v33dxtQehuGrMcHoPA/F9FNX//+/WyCJvfi798f9714GRjKgYp8USUfAIUawCyVa3//vrBAkmJb+Pvv3xIWCEcNqC4DSbIJaGYDVI6BfRGKpMrNv3/vI7htf/8eQPAu//t3XwfBbf//7z+cEw70oTmSJUCdf+Gcor9/v0njkgQGWiuSXNh+YCAhSX4QgLFZvSuAQfTBEy455e/PXDEQQ0h+1o6/ILAPYU4mkHurDQjO/gNL/a2TQUiyXfkLBf9BxKcQRiQXMBjOg0q+uXC8cQlalDCwZ7z5+3fJoww7hoEGAMUNp28BRiGTAAAAAElFTkSuQmCC"
+            }
+        }
+    ]
+}
+```
+
+prediction
 ```
 MODEL_NAME=flowers-sample
 INPUT_PATH=@./input.json
