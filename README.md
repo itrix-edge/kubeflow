@@ -45,4 +45,18 @@ SERVICE_HOSTNAME=$(kubectl get inferenceservice ${MODEL_NAME} -o jsonpath='{.sta
 
 curl -v -H "Host: ${SERVICE_HOSTNAME}" http://$CLUSTER_IP/v1/models/$MODEL_NAME:predict -d $INPUT_PATH
 ```
+## Install Kfserving independent
+```
+git clone https://github.com/kubeflow/kfserving.git
+```
+```
+TAG=v0.3.0
+$ kubectl apply -f ./install/$TAG/kfserving.yaml
+```
+Test KFServing Installation
+```
+kubectl get po -n kfserving-system
+NAME                             READY   STATUS    RESTARTS   AGE
+kfserving-controller-manager-0   2/2     Running   2          13m
+```
 
