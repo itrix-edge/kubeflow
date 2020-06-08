@@ -1,7 +1,7 @@
 # kubeflow
 kubeflow for itrix-edge
 
-## Run a prediction
+## Kfserving run a prediction
 ```
 MODEL_NAME=flowers-sample
 INPUT_PATH=@./input.json
