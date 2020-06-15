@@ -5,7 +5,7 @@ kubeflow for itrix-edge
 
 Labeled kubeflow namespace before deploy the InferenceService
 ```
-$ kubectl label namespace kubeflow serving.kubeflow.org/inferenceservice=enabled
+$ kubectl label namespace kfserving-test serving.kubeflow.org/inferenceservice=enabled
 ```
 Apply the CRD
 ```
