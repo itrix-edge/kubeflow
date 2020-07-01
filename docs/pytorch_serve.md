@@ -58,3 +58,12 @@ The predict endpoint returns a prediction response in JSON. It will look somethi
   }
 ]
 ```
+ctually result
+```
+root@k8s-worker-r530:~# curl http://127.0.0.1:8080/predictions/densenet161 -T kitten.jpg
+{
+  "code": 404,
+  "type": "ModelNotFoundException",
+  "message": "Model not found: densenet161"
+}
+```
