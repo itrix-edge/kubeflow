@@ -67,3 +67,5 @@ root@k8s-worker-r530:~# curl http://127.0.0.1:8080/predictions/densenet161 -T ki
   "message": "Model not found: densenet161"
 }
 ```
+
+5. how to use a model
