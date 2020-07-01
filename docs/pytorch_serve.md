@@ -7,6 +7,12 @@ git clone https://github.com/pytorch/serve.git
 cd serve/docker
 ```
 2. creating image 
+
+To enable docker BuildKit by default, set daemon configuration in /etc/docker/daemon.json feature to true and restart the daemon:
+```
+{ "features": { "buildkit": true } }
+```
+
 CPU based :
 ```
 DOCKER_BUILDKIT=1 docker build --file Dockerfile -t torchserve:latest .
