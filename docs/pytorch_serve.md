@@ -8,7 +8,7 @@ cd serve/docker
 ```
 2. creating image 
 
-To enable docker BuildKit by default, set daemon configuration in /etc/docker/daemon.json feature to true and restart the daemon:
+To enable docker BuildKit by default, set daemon configuration in /etc/docker/daemon.json feature to true and restart the daemon and restart docker:
 ```
 { "features": { "buildkit": true } }
 ```
