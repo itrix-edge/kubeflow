@@ -33,3 +33,26 @@ docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torc
 ```
 
 4. example inference
+The following code completes all three steps:
+
+curl -O https://s3.amazonaws.com/model-server/inputs/kitten.jpg
+curl http://127.0.0.1:8080/predictions/densenet161 -T kitten.jpg
+The predict endpoint returns a prediction response in JSON. It will look something like the following result:
+
+[
+  {
+    "tiger_cat": 0.46933549642562866
+  },
+  {
+    "tabby": 0.4633878469467163
+  },
+  {
+    "Egyptian_cat": 0.06456148624420166
+  },
+  {
+    "lynx": 0.0012828214094042778
+  },
+  {
+    "plastic_bag": 0.00023323034110944718
+  }
+]
