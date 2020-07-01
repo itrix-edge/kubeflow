@@ -58,7 +58,7 @@ The predict endpoint returns a prediction response in JSON. It will look somethi
   }
 ]
 ```
-ctually result
+actually result
 ```
 root@k8s-worker-r530:~# curl http://127.0.0.1:8080/predictions/densenet161 -T kitten.jpg
 {
