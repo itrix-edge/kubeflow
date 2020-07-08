@@ -8,6 +8,27 @@ cd serve/docker
 ```
 ### install Torch-serve  and model-archiver on host
 ```
+sudo apt install openjdk-11-jdk
+conda create -n torchserve
+
+source activate torchserve
+conda install psutil pytorch torchvision torchtext -c pytorch
+conda install cudatoolkit=10.1
+
+git clone https://github.com/pytorch/serve.git
+cd serve     
+pip install .
+cd model-archiver
+pip install .
+```
+
+2. 使用 model-archiver 打包模型
+
+下載測試模用模型資料範例
+wget https://download.pytorch.org/models/densenet161-8d451a50.pth
+
+
+
 ```
 ### use model-archiver on host to packae model and sevre
 package model
@@ -64,7 +85,10 @@ running torchserve and mount testdata
 ```
 docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
 ```
-
+```
+cd /serve/examples/image_classifier
+wget https://download.pytorch.org/models/densenet161-8d451a50.pth
+```
 enter the container
 ```
 docker exec -ti <container> sh
