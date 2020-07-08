@@ -74,6 +74,15 @@ docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torc
 ```
 docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve:latest --model-store=/tmp/models 
 ```
+production env
+```
+docker run --rm --shm-size=1g \
+        --ulimit memlock=-1 \
+        --ulimit stack=67108864 \
+        -p8080:8080 \
+        -p8081:8081 \
+        --mount type=bind,source=/path/to/model/store,target=/tmp/models <container> torchserve --model-store=/tmp/models 
+```
 ###  how to use model-archiver in container to package model 
 running torchserve and mount testdata 
 ```
