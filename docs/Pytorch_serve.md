@@ -31,10 +31,23 @@ GPU based :
 ```
 docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torchserve:latest-gpu
 ```
-### model-archiver 
-
-### start serving
-
+###  how to use model-archiver packaging model and serving model
+running torchserve and mount testdata 
+```
+docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
+```
+enter the container
+```
+docker exec -ti <container> sh
+```
+use model-archiver to package model data
+```
+torch-model-archiver --model-name densenet161 --version 1.0 --model-file /home/model-server/examples/image_classifier/densenet_161/model.py --serialized-file /home/model-server/examples/image_classifier/densenet161-8d451a50.pth --export-path /home/model-server/model-store --extra-files /home/model-server/examples/image_classifier/index_to_name.json --handler image_classifier
+```
+start serving
+```
+torchserve --start --model-store model-store --models densenet161=densenet161.mar
+```
 #### example inference
 The following code completes all three steps:
 ```
