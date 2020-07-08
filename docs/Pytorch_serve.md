@@ -22,14 +22,8 @@ cd model-archiver
 pip install .
 ```
 
-2. 使用 model-archiver 打包模型
-
-下載測試模用模型資料範例
-wget https://download.pytorch.org/models/densenet161-8d451a50.pth
 
 
-
-```
 ### use model-archiver on host to packae model and sevre
 package model
 ```
