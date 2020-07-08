@@ -1,7 +1,7 @@
 
-##  using pytorch serve
+##  using Torch serve
 
-1. clone torchserve source
+1. clone torchserve from source
 ```
 git clone https://github.com/pytorch/serve.git
 cd serve/docker
