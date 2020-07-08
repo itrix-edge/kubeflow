@@ -31,10 +31,28 @@ GPU based :
 ```
 docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torchserve:latest-gpu
 ```
-###  how to use model-archiver packaging model and serving model
+### use model-archiver on host to packae model
+```
+torch-model-archiver --model-name densenet161_ts --version 1.0  --serialized-file densenet161.pt --extra-files examples/image_classifier/index_to_name.json --handler image_classifier
+```
+```
+mkdir model_store
+mv densenet161_ts.mar model_store/
+```
+```
+torchserve --start --model-store model_store --models densenet161=densenet161_ts.mar
+```
+```
+curl http://127.0.0.1:8080/predictions/densenet161 -T examples/image_classifier/kitten.jpg
+```
+### running torchserve from local package model
+```
+docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
+```
+###  how to use model-archiver in container to packae model 
 running torchserve and mount testdata 
 ```
-docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve --model-store=/tmp/models 
+docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve:latest --model-store=/tmp/models 
 ```
 ```
 docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
@@ -77,4 +95,6 @@ The predict endpoint returns a prediction response in JSON. It will look somethi
   }
 ]
 ```
+
+
 
