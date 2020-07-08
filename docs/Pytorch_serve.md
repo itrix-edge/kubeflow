@@ -58,14 +58,16 @@ docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torc
 ```
 docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
 ```
-###  how to use model-archiver in container to packae model 
-running torchserve and mount testdata 
+or
 ```
 docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve:latest --model-store=/tmp/models 
 ```
+###  how to use model-archiver in container to packae model 
+running torchserve and mount testdata 
 ```
 docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
 ```
+
 enter the container
 ```
 docker exec -ti <container> sh
