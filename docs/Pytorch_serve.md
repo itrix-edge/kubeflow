@@ -17,6 +17,7 @@ torch-model-archiver --model-name densenet161_ts --version 1.0  --serialized-fil
 move to model_store
 ```
 mkdir model_store
+chmod 777 model_store
 mv densenet161_ts.mar model_store/
 ```
 start serving from host
@@ -56,10 +57,6 @@ docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torc
 
 ### docker run torchserve from local packaged model
 ```
-docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
-```
-or
-```
 docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve:latest --model-store=/tmp/models 
 ```
 ###  how to use model-archiver in container to package model 
@@ -78,13 +75,15 @@ torch-model-archiver --model-name densenet161 --version 1.0 --model-file /home/m
 ```
 start serving
 ```
+torchserve --stop
+
 torchserve --start --model-store model-store --models densenet161=densenet161.mar
 ```
 #### example inference
 The following code completes all three steps:
 ```
 curl -O https://s3.amazonaws.com/model-server/inputs/kitten.jpg
-curl http://localhost:8080/predictions/densenet161 -T kitten.jpg
+curl http://172.0.0.1:8080/predictions/densenet161 -T kitten.jpg
 ```
 The predict endpoint returns a prediction response in JSON. It will look something like the following result:
 ```
