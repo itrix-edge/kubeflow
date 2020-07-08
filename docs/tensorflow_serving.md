@@ -4,7 +4,7 @@ download image
 ```
 docker pull tensorflow/serving:latest
 ```
-download example models from source
+### download example models from source
 ```
 git clone https://github.com/tensorflow/serving
 ```
