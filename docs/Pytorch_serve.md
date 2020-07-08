@@ -27,7 +27,7 @@ predict
 ```
 curl http://127.0.0.1:8080/predictions/densenet161 -T examples/image_classifier/kitten.jpg
 ```
-# Docker
+## Docker
 #### creating docker image 
 
 To enable docker BuildKit by default, set daemon configuration in /etc/docker/daemon.json feature to true and restart the daemon and restart docker:
