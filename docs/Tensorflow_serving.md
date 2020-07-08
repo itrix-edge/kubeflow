@@ -10,12 +10,12 @@ git clone https://github.com/tensorflow/serving
 ```
 
 #### Start TensorFlow Serving container and open the REST API port
-
+```
 docker run -p 8501:8501 
 /--mount type=bind,source="test_model_pwd",target=/models/"model_name"
 /-e MODEL_NAME="model_name"
 /-t tensorflow/serving &
-
+```
 
 using source example mode
 ```
