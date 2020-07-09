@@ -96,7 +96,7 @@ To solve this error, add args (--no-config-snapshots)
 ```
 torchserve --start --model-store model-store --models densenet161=densenet161.mar --no-config-snapshots
 ```
-### docker run torchserve from local packaged model (production env)
+### docker run torchserve on production env
 
 ```
 docker run --rm --shm-size=1g \
@@ -106,10 +106,7 @@ docker run --rm --shm-size=1g \
         -p8081:8081 \
         --mount type=bind,source=/path/to/model/store,target=/tmp/models <container> torchserve --model-store=/tmp/models 
 ```
-In the example case
-```
-docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models pytorch/torchserve:0.1.1-cpu --model-store=/tmp/models 
-```
+
 #### example inference
 The following code completes all three steps:
 ```
