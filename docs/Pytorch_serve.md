@@ -106,6 +106,12 @@ torchserve --stop
 
 torchserve --start --model-store model-store --models densenet161=densenet161.mar
 ```
+here are a error about model snapshot
+https://github.com/pytorch/serve/issues/383
+To solve this error, add args (--no-config-snapshots)
+```
+torchserve --start --model-store model-store --models densenet161=densenet161.mar --no-config-snapshots
+```
 #### example inference
 The following code completes all three steps:
 ```
