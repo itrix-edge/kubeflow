@@ -22,8 +22,6 @@ cd model-archiver
 pip install .
 ```
 
-
-
 ### use model-archiver on host to packae model and sevre
 package model
 ```
@@ -69,24 +67,10 @@ GPU based :
 ```
 docker run --rm -it --gpus '"device=1,2"' -p 8080:8080 -p 8081:8081 pytorch/torchserve:latest-gpu
 ```
-
-### docker run torchserve from local packaged model
-```
-docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models torchserve:latest --model-store=/tmp/models 
-```
-production env
-```
-docker run --rm --shm-size=1g \
-        --ulimit memlock=-1 \
-        --ulimit stack=67108864 \
-        -p8080:8080 \
-        -p8081:8081 \
-        --mount type=bind,source=/path/to/model/store,target=/tmp/models <container> torchserve --model-store=/tmp/models 
-```
 ###  how to use model-archiver in container to package model 
 running torchserve and mount testdata 
 ```
-docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  torchserve:latest
+docker run --rm -it -p 8080:8080 -p 8081:8081 --name mar -v /root/model-store:/home/model-server/model-store -v /root/serve/examples:/home/model-server/examples  pytorch/torchserve:0.1.1-cpu
 ```
 ```
 cd /serve/examples/image_classifier
@@ -111,6 +95,20 @@ https://github.com/pytorch/serve/issues/383
 To solve this error, add args (--no-config-snapshots)
 ```
 torchserve --start --model-store model-store --models densenet161=densenet161.mar --no-config-snapshots
+```
+### docker run torchserve from local packaged model (production env)
+
+```
+docker run --rm --shm-size=1g \
+        --ulimit memlock=-1 \
+        --ulimit stack=67108864 \
+        -p8080:8080 \
+        -p8081:8081 \
+        --mount type=bind,source=/path/to/model/store,target=/tmp/models <container> torchserve --model-store=/tmp/models 
+```
+In the example case
+```
+docker run --rm -it -p8080:8080 -p8081:8081 --mount type=bind,source=/root/serve/examples/image_classifier/densenet_161,target=/tmp/models pytorch/torchserve:0.1.1-cpu --model-store=/tmp/models 
 ```
 #### example inference
 The following code completes all three steps:
