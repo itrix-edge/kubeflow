@@ -1,7 +1,15 @@
 # KubeFlow Install
-## 前置作業
-* 準備好Kubernetes Cluster
-* 安裝好NFS Server
+## Rreceding operation
+* Create Kubernetes Cluster
+* Create NFS Server
+
+## Nodes Info
+
+| IP Address | Role | 
+| -------- | -------- | 
+| 10.172.21.100     | Master   | 
+| 10.172.21.101   | Worker  | 
+| 10.172.21.100     | NFS  | 
 
 ## Install NFS Persistent Volumes
 Install NFS Server
@@ -12,7 +20,7 @@ $ sudo mkdir /var/nfsdata
 ```
 Than you need to configure /etc/exports to share that directory:
 ```shell=
-/nfsdata 192.168.0.0/16(rw,no_root_squash,no_subtree_check)
+/nfsdata 10.172.21.0/24 (rw,no_root_squash,no_subtree_check)
 ```
 NFS Client
 Each node of the cluster must be able to establish a connection to the NFS server. To enable this, install the following NFS client library on each node:
