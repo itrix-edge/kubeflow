@@ -30,3 +30,6 @@ curl -d '{"instances": [1.0, 2.0, 5.0]}' -X POST http://localhost:8501/v1/models
 ```
 { "predictions": [2.5, 3.0, 4.5] }
 ```
+
+#### Tensorflow serving foe ARM64
+https://github.com/emacski/tensorflow-serving-arm
